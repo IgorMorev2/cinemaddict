@@ -1,4 +1,5 @@
 import { render } from '../render';
+
 import SortView from '../view/sort-view';
 import FilmsView from '../view/films-view';
 import FilmsListView from '../view/films-list-view';
@@ -12,20 +13,25 @@ export default class FilmsPresenter {
   filmsListComponent = new FilmsListView();
   filmsListContainerComponent = new FilmsListContainerView();
 
-  init(container) {
+  init(container, filmsModel, commentsModel) {
     this.container = container;
+    this.filmsModel = filmsModel;
+    this.filmsList = [...this.filmsModel.getFilms()];
+    this.commentsModel = commentsModel;
+
 
     render(new SortView(), this.container);
     render(this.filmsComponent, this.container);
     render(this.filmsListComponent, this.filmsComponent.getElement());
     render(this.filmsListContainerComponent, this.filmsListComponent.getElement());
 
-    for (let i = 0; i < 5; i++) {
-      render(new FilmCardView(), this.filmsListContainerComponent.getElement());
+    for (let i = 0; i < this.filmsList.length; i++) {
+      render(new FilmCardView(this.filmsList[i]), this.filmsListContainerComponent.getElement()); //
     }
 
-    render(new ShowMoreButtonView(),this.filmsListComponent.getElement());
+    const comments = [...this.commentsModel.getComments(this.filmsList[0])];
 
-    render(new FilmDetailsView(), this.container.parentElement);
+    render(new ShowMoreButtonView(), this.filmsListComponent.getElement());
+    render(new FilmDetailsView(this.filmsList[0], comments), this.container.parentElement);
   }
 }
