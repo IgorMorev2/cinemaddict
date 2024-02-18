@@ -1,21 +1,23 @@
 import { createElement } from '../render';
 
-const createShowMoreButtonTemplate = () => '<button class="films-list__show-more">Show more</button>';
-
 export default class ShowMoreButtonView {
-  getTemplate() {
-    return createShowMoreButtonTemplate();
+  #element;
+
+  #createShowMoreButtonTemplate = () => '<button class="films-list__show-more">Show more</button>';
+
+  get template() {
+    return this.#createShowMoreButtonTemplate();
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return this.element;
+    return this.#element;
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  removeElement = () => {
+    this.#element = null;
+  };
 }

@@ -1,11 +1,11 @@
 import { getRandomInteger, getRandomFloat, getRandomArrayFromArray, getRandomValue, generateDate, generateTextFromParagraph } from '../utils';
-import { FILMS, POSTERS, PARAGRAPH, GENRES, RELEASE_COUNTRIES, AGE_RATING, DIRECTORS, WRITERS, ACTORS } from '../consts';
+import { FILMS, POSTERS, PARAGRAPH, GENRES, RELEASE_COUNTRIES, AGE_RATING, DIRECTORS, WRITERS, ACTORS } from './fish-const';
 import { FILMS_COUNT, MAX_COMMENTS_IN_FILM } from '../consts';
 
 const generateFilm = () => ({
   title: getRandomValue(FILMS),
   alternativeTitle: 'Laziness Who Sold Themselves',
-  totalRating: getRandomFloat(1, 10, 1),
+  totalRating: getRandomFloat(1, 10),
   poster: getRandomValue(POSTERS),
   ageRating: getRandomValue(AGE_RATING),
   director: getRandomValue(DIRECTORS),

@@ -1,4 +1,4 @@
-import { COMMENT_EMOTIONS, AUTORS, PARAGRAPH } from '../consts';
+import { COMMENT_EMOTIONS, AUTORS, PARAGRAPH } from './fish-const';
 import { generateDate, getRandomValue, generateTextFromParagraph } from '../utils';
 
 const generateComment = () => ({
@@ -22,3 +22,4 @@ export const generateComments = (films) => {
     };
   });
 };
+

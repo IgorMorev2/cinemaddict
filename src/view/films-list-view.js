@@ -1,26 +1,28 @@
 import { createElement } from '../render';
 
-const createFilmsListTemplate = () =>
-  `
-    <section class="films__list">
-      <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
-    </section>
-  `;
-
 export default class FilmsListView {
-  getTemplate() {
-    return createFilmsListTemplate();
+  #element;
+
+  #createFilmsListTemplate = () =>
+    `
+      <section class="films__list">
+        <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
+      </section>
+    `;
+
+  get template() {
+    return this.#createFilmsListTemplate();
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(createFilmsListTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return this.element;
+    return this.#element;
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  removeElement = () => {
+    this.#element = null;
+  };
 }

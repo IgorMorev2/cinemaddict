@@ -7,7 +7,7 @@ export const getRandomInteger = (num1, num2) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const getRandomFloat = (min, max, decimals) => {
+export const getRandomFloat = (min, max, decimals = 1) => {
   const str = (Math.random() * (max - min) + min).toFixed(
     decimals,
   );

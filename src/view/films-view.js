@@ -1,21 +1,23 @@
 import { createElement } from '../render.js';
 
-const createFilmsTemplate = () => '<section class="films"></section>';
-
 export default class FilmsView {
-  getTemplate() {
-    return createFilmsTemplate();
+  #element;
+
+  #createFilmsTemplate = () => '<section class="films"></section>';
+
+  get template() {
+    return this.#createFilmsTemplate();
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return this.element;
+    return this.#element;
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  removeElement = () => {
+    this.#element = null;
+  };
 }

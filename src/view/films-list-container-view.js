@@ -1,21 +1,23 @@
 import { createElement } from '../render';
 
-const createFilmListContainerViewTemplate = () => '<div class="films-list__container"></div>';
-
 export default class FilmListContainerView {
-  getTemplate() {
-    return createFilmListContainerViewTemplate();
+  #element;
+
+  #createFilmListContainerViewTemplate = () => '<div class="films-list__container"></div>';
+
+  get template() {
+    return this.#createFilmListContainerViewTemplate();
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return this.element;
+    return this.#element;
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  removeElement = () => {
+    this.#element = null;
+  };
 }
