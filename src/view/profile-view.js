@@ -1,8 +1,6 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 
-export default class ProfileView {
-  #element;
-
+export default class ProfileView extends AbstractView {
   #createProfileTemplate = () =>
     `
       <section class="header__profile profile">
@@ -14,16 +12,4 @@ export default class ProfileView {
   get template() {
     return this.#createProfileTemplate();
   }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement = () => {
-    this.#element = null;
-  };
 }

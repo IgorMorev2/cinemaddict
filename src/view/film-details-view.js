@@ -1,12 +1,12 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import { humanizeDate, humanizeTime, getPeopleListTemplate } from '../utils';
 
-export default class FilmDetailsView {
+export default class FilmDetailsView extends AbstractView {
   #film;
   #comments;
-  #element;
 
   constructor(film, comments) {
+    super();
     this.#film = film;
     this.#comments = comments;
   }
@@ -213,16 +213,4 @@ export default class FilmDetailsView {
   get template() {
     return this.#createFilmDetailsTemplate(this.#film, this.#comments);
   }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement = () => {
-    this.#element = null;
-  };
 }

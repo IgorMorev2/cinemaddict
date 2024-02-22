@@ -1,4 +1,4 @@
-import { render } from './render';
+import { render } from './framework/render';
 
 //Поключение классов из Model
 import FilmsModel from './model/films-model';

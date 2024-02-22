@@ -1,4 +1,4 @@
-import { render } from '../render';
+import { render } from '../framework/render';
 import { FILMS_COUNT_PER_STER } from '../consts';
 
 import SortView from '../view/sort-view';

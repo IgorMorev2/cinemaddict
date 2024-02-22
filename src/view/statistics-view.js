@@ -1,23 +1,9 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 
-export default class StatisticsView {
-  #element;
-
+export default class StatisticsView extends AbstractView {
   #createStatisticsTemplate = () => '<p>130 291 movies inside</p>';
 
   get template() {
     return this.#createStatisticsTemplate();
   }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement = () => {
-    this.#element = null;
-  };
 }

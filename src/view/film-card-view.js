@@ -1,11 +1,11 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import { humanizeTime, getYearFromDate } from '../utils';
 
-export default class FilmCardView {
+export default class FilmCardView extends AbstractView {
   #film;
-  #element;
 
   constructor(film) {
+    super();
     this.#film = film;
   }
 
@@ -71,16 +71,4 @@ export default class FilmCardView {
   get template() {
     return this.#createFilmCardTemplate(this.#film);
   }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement = () => {
-    this.#element = null;
-  };
 }

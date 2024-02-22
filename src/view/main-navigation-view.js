@@ -1,8 +1,6 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 
-export default class MainNavigationView {
-  #element;
-
+export default class MainNavigationView extends AbstractView {
   #createMainNavigationTemplate = () =>
     `
       <nav class="main-navigation">
@@ -16,16 +14,4 @@ export default class MainNavigationView {
   get template() {
     return this.#createMainNavigationTemplate();
   }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement = () => {
-    this.#element = null;
-  };
 }
