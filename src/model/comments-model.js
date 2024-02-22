@@ -1,9 +1,9 @@
 import { generateComments } from '../fish/comment';
 
 export default class CommentsModel {
-  #comments;
-  #allComments;
-  #filmsModel;
+  #comments = null;
+  #allComments = null;
+  #filmsModel = null;
 
   #generateAllComments() {
     this.#allComments = generateComments(this.#filmsModel.films);

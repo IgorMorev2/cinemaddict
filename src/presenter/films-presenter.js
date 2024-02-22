@@ -1,4 +1,4 @@
-import { render } from '../framework/render';
+import { render, remove } from '../framework/render';
 import { FILMS_COUNT_PER_STER } from '../consts';
 
 import SortView from '../view/sort-view';
@@ -33,9 +33,8 @@ export default class FilmsPresenter {
 
   #renderFilm = (film) => {
     this.#filmCardComponent = new FilmCardView(film);
-    const linkFilmCard = this.#filmCardComponent.element.querySelector('.film-card__link');
 
-    linkFilmCard.addEventListener('click', () => {
+    this.#filmCardComponent.setLinkClickHandler(() => {
       this.#addFilmDetails(film);
       document.addEventListener('keydown', this.#onEscKeyDown);
     });
@@ -45,7 +44,7 @@ export default class FilmsPresenter {
 
   #addFilmDetails = (film) => {
     if (this.#filmDetailsComponent) {
-      this.#removeFilmDetails();
+      remove(this.#filmDetailsComponent);
     }
 
     this.#renderFilmDetails(film);
@@ -53,8 +52,7 @@ export default class FilmsPresenter {
   };
 
   #removeFilmDetails = () => {
-    this.#filmDetailsComponent.element.remove();
-    this.#filmDetailsComponent = null;
+    remove(this.#filmDetailsComponent);
     document.body.classList.remove('hide-overflow');
   };
 
@@ -70,31 +68,25 @@ export default class FilmsPresenter {
     const comments = [...this.#commentsModel.comments];
 
     this.#filmDetailsComponent = new FilmDetailsView(film, comments);
-    const closeButtonFilmDetails = this.#filmDetailsComponent.element.querySelector('.film-details__close-btn');
 
-    closeButtonFilmDetails.addEventListener('click', this.#removeFilmDetails);
+    this.#filmDetailsComponent.setCloseButtonClickHandler(this.#removeFilmDetails);
 
     render(this.#filmDetailsComponent, this.#container.parentElement);
   };
 
-  #handlerShowMoreClick = (evt) => {
-    evt.preventDefault();
-
+  #handlerShowMoreClick = () => {
     this.#filmsList
       .slice(this.#renderedFilmCount, this.#renderedFilmCount + FILMS_COUNT_PER_STER)
       .forEach((film) => this.#renderFilm(film));
 
-
     this.#renderedFilmCount += FILMS_COUNT_PER_STER;
 
     if (this.#renderedFilmCount >= this.#filmsList.length) {
-      this.#showMoreButtonComponent.element.remove();
-      this.#showMoreButtonComponent.removeElement();
+      remove(this.#showMoreButtonComponent);
     }
   };
 
   #renderFilmsSection = () => {
-
     if (this.#filmsListContainerComponent.element.children.length === 0) {
       render(new FilmsListEmptyTextView(), this.#container);
     } else {
@@ -104,7 +96,7 @@ export default class FilmsPresenter {
       render(this.#filmsListContainerComponent, this.#filmsListComponent.element);
       this.#showMoreButtonComponent = new ShowMoreButtonView();
 
-      this.#showMoreButtonComponent.element.addEventListener('click', this.#handlerShowMoreClick);
+      this.#showMoreButtonComponent.setClickHandler(this.#handlerShowMoreClick);
       render(this.#showMoreButtonComponent, this.#filmsListComponent.element);
     }
   };

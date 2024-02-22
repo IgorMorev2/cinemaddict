@@ -2,7 +2,7 @@ import AbstractView from '../framework/view/abstract-view';
 import { humanizeTime, getYearFromDate } from '../utils';
 
 export default class FilmCardView extends AbstractView {
-  #film;
+  #film = null;
 
   constructor(film) {
     super();
@@ -68,7 +68,18 @@ export default class FilmCardView extends AbstractView {
     </article>
   `;
 
+  #clickHandler = (evt) => {
+    evt.preventDefault();
+
+    this._callback.click();
+  };
+
   get template() {
     return this.#createFilmCardTemplate(this.#film);
   }
+
+  setLinkClickHandler = (callback) => {
+    this._callback.click = callback;
+    this.element.querySelector('.film-card__link').addEventListener('click', this.#clickHandler);
+  };
 }

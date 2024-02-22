@@ -2,8 +2,8 @@ import AbstractView from '../framework/view/abstract-view';
 import { humanizeDate, humanizeTime, getPeopleListTemplate } from '../utils';
 
 export default class FilmDetailsView extends AbstractView {
-  #film;
-  #comments;
+  #film = null;
+  #comments = null;
 
   constructor(film, comments) {
     super();
@@ -210,7 +210,18 @@ export default class FilmDetailsView extends AbstractView {
   </section>
   `;
 
+  #clickHandler = (evt) => {
+    evt.preventDefault();
+
+    this._callback.click();
+  };
+
   get template() {
     return this.#createFilmDetailsTemplate(this.#film, this.#comments);
   }
+
+  setCloseButtonClickHandler = (callback) => {
+    this._callback.click = callback;
+    this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#clickHandler);
+  };
 }
