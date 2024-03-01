@@ -1,4 +1,5 @@
-import { getRandomInteger, getRandomFloat, getRandomArrayFromArray, getRandomValue, generateDate, generateTextFromParagraph } from '../utils';
+import { generateDate, generateTextFromParagraph } from '../utils/data';
+import { getRandomInteger, getRandomFloat, getRandomValue, getRandomArrayFromArray } from '../utils/common';
 import { FILMS, POSTERS, PARAGRAPH, GENRES, RELEASE_COUNTRIES, AGE_RATING, DIRECTORS, WRITERS, ACTORS } from './fish-const';
 import { FILMS_COUNT, MAX_COMMENTS_IN_FILM } from '../consts';
 
@@ -36,20 +37,19 @@ export const generateFilms = () => {
 
     return {
       id: String(index + 1),
-      comments: (hasComments)
-        ? Array.from(
-          { length: filmCommentCount },
-          (_value, commentIndex) => String(totalCommentsCount - commentIndex)
-        )
-        : [],
+      comments: (hasComments) ? Array.from(
+        { length: filmCommentCount },
+        (_value, commentIndex) => String(totalCommentsCount - commentIndex)
+      ) : [],
       filmInfo: film,
+      userDetails: {
+        watchList: Boolean(getRandomInteger(0, 1)),
+        alreadyWatched: Boolean(getRandomInteger(0, 1)),
+        watchindDate: generateDate('2018-01-25'),
+        favorite: Boolean(getRandomInteger(0, 1)),
+      },
     };
   });
 };
 
-// userDetails: {
-//   watchList: Boolean(getRandomInteger(0, 1)),
-//   alreadyWatched: Boolean(getRandomInteger(0, 1)),
-//   watchindDate: generateDate('2018-01-25'),
-//   favorite: Boolean(getRandomInteger(0, 1)),
-// },
+

@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view';
-import { humanizeDate, humanizeTime, getPeopleListTemplate } from '../utils';
+import { humanizeDate, humanizeTime, getPeopleListTemplate } from '../utils/data';
 
 export default class FilmDetailsView extends AbstractView {
   #film = null;
@@ -83,14 +83,31 @@ export default class FilmDetailsView extends AbstractView {
     `;
   };
 
-  #createFilmDetailsControlsTemplate = () =>
-    `
+  #createFilmDetailsControlsTemplate = (film) => {
+    const { watchList, alreadyWatched, favorite } = film.userDetails;
+
+    const activeControlClassName = 'film-details__control-button--active';
+
+    const watchListClassName = watchList
+      ? `film-details__control-button--watchlist ${activeControlClassName}`
+      : 'film-details__control-button--watchlist';
+
+    const watchedClassName = alreadyWatched
+      ? `film-details__control-button--watched ${activeControlClassName}`
+      : 'film-details__control-button--watched';
+
+    const favoriteClassName = favorite
+      ? `film-details__control-button--favorite ${activeControlClassName}`
+      : 'film-details__control-button--favorite';
+
+    return `
       <section class="film-details__controls">
-        <button type="button" class="film-details__control-button film-details__control-button--watchlist" id="watchlist" name="watchlist">Add to watchlist</button>
-        <button type="button" class="film-details__control-button film-details__control-button--active film-details__control-button--watched" id="watched" name="watched">Already watched</button>
-        <button type="button" class="film-details__control-button film-details__control-button--favorite" id="favorite" name="favorite">Add to favorites</button>
-      </section>
-    `;
+        <button type="button" class="film-details__control-button ${watchListClassName}" id="watchlist" name="watchlist">Add to watchlist</button>
+        <button type="button" class="film-details__control-button ${watchedClassName}" id="watched" name="watched">Already watched</button>
+        <button type="button" class="film-details__control-button ${favoriteClassName}" id="favorite" name="favorite">Add to favorites</button>
+      </section >
+      `;
+  };
 
   #createFilmDetailsCommentsTemplate = () =>
     `
@@ -148,7 +165,7 @@ export default class FilmDetailsView extends AbstractView {
           </div>
         </li>
       </ul>
-    `;
+      `;
 
   #createFilmDetailsFormTemplate = () =>
     `
@@ -193,7 +210,7 @@ export default class FilmDetailsView extends AbstractView {
         </div>
 
         ${this.#createFilmDetailsInfoTemplate(film)}
-        ${this.#createFilmDetailsControlsTemplate()}
+        ${this.#createFilmDetailsControlsTemplate(film)}
 
       </div>
 
