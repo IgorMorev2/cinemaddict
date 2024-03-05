@@ -1,7 +1,6 @@
 import { generateComments } from '../fish/comment';
 
 export default class CommentsModel {
-  #comments = null;
   #allComments = null;
   #filmsModel = null;
 
@@ -14,14 +13,8 @@ export default class CommentsModel {
     this.#generateAllComments();
   }
 
-  get comments() {
-    return this.#comments;
-  }
-
-  set comments(film) {
-    this.#comments = film.comments.map((commentId) =>
-      this.#allComments.find((comment) =>
-        comment.id === commentId)
-    );
-  }
+  get = (film) => film.comments.map((commentId) =>
+    this.#allComments.find((comment) =>
+      comment.id === commentId)
+  );
 }

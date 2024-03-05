@@ -1,7 +1,6 @@
 import { render, remove, replace } from '../framework/render';
 
 import FilmCardView from '../view/film-card-view';
-// import FilmDetailsPresenter from './film-details-presenter';
 
 export default class FilmPresenter {
   #film = null;
@@ -9,9 +8,12 @@ export default class FilmPresenter {
   #filmCardComponent = null;
   #changeData = null;
 
-  constructor(filmContainer, changeData) {
+  #handlerLinkClick = null;
+
+  constructor(filmContainer, changeData, handlerLinkClick) {
     this.#filmContainer = filmContainer;
     this.#changeData = changeData;
+    this.#handlerLinkClick = handlerLinkClick;
   }
 
 
@@ -55,6 +57,8 @@ export default class FilmPresenter {
     const prevFilmCardComponent = this.#filmCardComponent;
 
     this.#filmCardComponent = new FilmCardView(this.#film);
+
+    this.#filmCardComponent.setLinkClickHandler(this.#handlerLinkClick);
 
     this.#filmCardComponent.setWatchlistBtnClickHandler(this.#handlerWatchlistBtnClick);
     this.#filmCardComponent.setWatchedBtnClickHandler(this.#handlerWatchedBtnClick);

@@ -11,6 +11,10 @@ export default class FilmDetailsView extends AbstractView {
     this.#comments = comments;
   }
 
+  get template() {
+    return this.#createFilmDetailsTemplate(this.#film, this.#comments);
+  }
+
   #createFilmDetailsInfoTemplate = (film) => {
     const { filmInfo } = film;
     const { title, alternativeTitle, totalRating, poster, ageRating, director, writers, actors, release, runtime, genres, description } = filmInfo;
@@ -227,18 +231,57 @@ export default class FilmDetailsView extends AbstractView {
   </section>
   `;
 
-  #clickHandler = (evt) => {
+  #closeBtnClickHandler = (evt) => {
     evt.preventDefault();
 
-    this._callback.click();
+    this._callback.closeBtnClick();
   };
 
-  get template() {
-    return this.#createFilmDetailsTemplate(this.#film, this.#comments);
-  }
+  #watchlistBtnClickHandler = (evt) => {
+    evt.preventDefault();
 
-  setCloseButtonClickHandler = (callback) => {
-    this._callback.click = callback;
-    this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#clickHandler);
+    this._callback.watchlistBtnClick();
+  };
+
+  #watchedBtnClickHandler = (evt) => {
+    evt.preventDefault();
+
+    this._callback.watchedBtnClick();
+  };
+
+  #favoriteBtnClickHandler = (evt) => {
+    evt.preventDefault();
+
+    this._callback.favoriteBtnClick();
+  };
+
+  setCloseBtnClickHandler = (callback) => {
+    this._callback.closeBtnClick = callback;
+    this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#closeBtnClickHandler);
+  };
+
+
+  setWatchlistBtnClickHandler = (callback) => {
+    this._callback.watchlistBtnClick = callback;
+
+    this.element
+      .querySelector('.film-details__control-button--watchlist')
+      .addEventListener('click', this.#watchlistBtnClickHandler);
+  };
+
+  setWatchedBtnClickHandler = (callback) => {
+    this._callback.watchedBtnClick = callback;
+
+    this.element
+      .querySelector('.film-details__control-button--watched')
+      .addEventListener('click', this.#watchedBtnClickHandler);
+  };
+
+  setFavoriteBtnClickHandler = (callback) => {
+    this._callback.favoriteBtnClick = callback;
+
+    this.element
+      .querySelector('.film-details__control-button--favorite')
+      .addEventListener('click', this.#favoriteBtnClickHandler);
   };
 }
