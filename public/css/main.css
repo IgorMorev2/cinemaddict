@@ -123,6 +123,7 @@ button {
 
 .profile__rating {
   font-size: 20px;
+  text-transform: capitalize;
 }
 
 .profile__avatar {

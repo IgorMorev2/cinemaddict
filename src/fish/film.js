@@ -35,6 +35,7 @@ export const generateFilms = () => {
 
     totalCommentsCount += filmCommentCount;
 
+    const alreadyWatched = Boolean(getRandomInteger(0, 1));
     return {
       id: String(index + 1),
       comments: (hasComments) ? Array.from(
@@ -44,8 +45,8 @@ export const generateFilms = () => {
       filmInfo: film,
       userDetails: {
         watchList: Boolean(getRandomInteger(0, 1)),
-        alreadyWatched: Boolean(getRandomInteger(0, 1)),
-        watchindDate: generateDate('2018-01-25'),
+        alreadyWatched,
+        watchindDate: alreadyWatched ? generateDate('2018-01-25'): null,
         favorite: Boolean(getRandomInteger(0, 1)),
       },
     };

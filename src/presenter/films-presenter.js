@@ -57,11 +57,10 @@ export default class FilmsPresenter {
 
   #onEscKeyDown = (evt) => {
     if (evt.key === 'Escape') {
-      // this.destroy();
-      console.log(this);
+      this.#removeFilmDetailsComponent();
       document.removeEventListener('keydown', this.#onEscKeyDown);
     }
-  }
+  };
 
   #addFilmDetailsComponent = (film) => {
     this.#selectedFilm = film;

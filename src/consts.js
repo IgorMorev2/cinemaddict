@@ -13,3 +13,25 @@ export const TITLE_TEXT = {
     favorites: 'There are no favorite movies now',
   }
 };
+
+export const FILTER_TYPES = {
+  all: 'All',
+  watchlist: 'Watchlist',
+  history: 'History',
+  favorites: 'Favorites',
+};
+
+export const PROFILE_RATING = [
+  {
+    name: 'novice',
+    lowerLimit: 1,
+  },
+  {
+    name: 'fan',
+    lowerLimit: 11,
+  },
+  {
+    name: 'movie buff',
+    lowerLimit: 21,
+  },
+];
