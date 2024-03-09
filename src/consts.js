@@ -35,3 +35,9 @@ export const PROFILE_RATING = [
     lowerLimit: 21,
   },
 ];
+
+export const SORT_TYPES = {
+  default: 'default',
+  date: 'date',
+  rating: 'rating',
+};
