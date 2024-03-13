@@ -16,6 +16,29 @@ export default class FilmPresenter {
     this.#handlerLinkClick = handlerLinkClick;
   }
 
+  init = (film) => {
+    this.#film = film;
+
+    const prevFilmCardComponent = this.#filmCardComponent;
+
+    this.#filmCardComponent = new FilmCardView(this.#film);
+
+    this.#filmCardComponent.setLinkClickHandler(this.#handlerLinkClick);
+
+    this.#filmCardComponent.setWatchlistBtnClickHandler(this.#handlerWatchlistBtnClick);
+    this.#filmCardComponent.setWatchedBtnClickHandler(this.#handlerWatchedBtnClick);
+    this.#filmCardComponent.setFavoriteBtnClickHandler(this.#handlerFavoriteBtnClick);
+
+    if (prevFilmCardComponent === null) {
+      render(this.#filmCardComponent, this.#filmContainer);
+    } else {
+      replace(this.#filmCardComponent, prevFilmCardComponent);
+    }
+  };
+
+  destroy = () => {
+    remove(this.#filmCardComponent);
+  };
 
   #handlerWatchlistBtnClick = () => {
     this.#changeData({
@@ -45,29 +68,5 @@ export default class FilmPresenter {
         favorite: !this.#film.userDetails.favorite,
       }
     });
-  };
-
-  destroy = () => {
-    remove(this.#filmCardComponent);
-  };
-
-  init = (film) => {
-    this.#film = film;
-
-    const prevFilmCardComponent = this.#filmCardComponent;
-
-    this.#filmCardComponent = new FilmCardView(this.#film);
-
-    this.#filmCardComponent.setLinkClickHandler(this.#handlerLinkClick);
-
-    this.#filmCardComponent.setWatchlistBtnClickHandler(this.#handlerWatchlistBtnClick);
-    this.#filmCardComponent.setWatchedBtnClickHandler(this.#handlerWatchedBtnClick);
-    this.#filmCardComponent.setFavoriteBtnClickHandler(this.#handlerFavoriteBtnClick);
-
-    if (prevFilmCardComponent === null) {
-      render(this.#filmCardComponent, this.#filmContainer);
-    } else {
-      replace(this.#filmCardComponent, prevFilmCardComponent);
-    }
   };
 }

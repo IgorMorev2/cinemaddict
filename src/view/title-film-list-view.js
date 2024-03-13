@@ -1,16 +1,17 @@
 import AbstractView from '../framework/view/abstract-view';
 import { TITLE_TEXT } from '../consts';
 
+
+const createTitleFilmListTemplate = (titleText) => {
+  const classTitleFilmList = titleText === TITLE_TEXT.defaultText ?
+    'films-list__title visually-hidden' :
+    'films-list__title';
+
+  return `<h2 class="${classTitleFilmList}">${titleText}</h2>`;
+};
+
 export default class TitleFilmListView extends AbstractView {
   #titleText = null;
-
-  #makeTitleFilmListTemplate = () => {
-    const classTitleFilmList = this.#titleText === TITLE_TEXT.defaultText ?
-      'films-list__title visually-hidden' :
-      'films-list__title';
-
-    return `<h2 class="${classTitleFilmList}">${this.#titleText}</h2>`;
-  };
 
   constructor(titleText = 'All movies. Upcoming') {
     super();
@@ -18,6 +19,6 @@ export default class TitleFilmListView extends AbstractView {
   }
 
   get template() {
-    return this.#makeTitleFilmListTemplate();
+    return createTitleFilmListTemplate(this.#titleText);
   }
 }

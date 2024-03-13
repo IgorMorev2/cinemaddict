@@ -23,6 +23,7 @@ const filmsModel = new FilmsModel();
 const commentsModel = new CommentsModel(filmsModel);
 
 const filters = generateFilter(filmsModel.films);
+
 const alreadyWatchindCount = filters
   .find((filter) => filter.name === 'Watchlist')
   .count;

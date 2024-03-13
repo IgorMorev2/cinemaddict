@@ -19,6 +19,8 @@ export const humanizeTime = (minutes) => {
   return `${hours}h ${remainingMinutes}m`;
 };
 
+export const commentHumanizeDate = (date) => dayjs(date).format('DD/MM/YYYY hh:mm');
+
 export const generateDate = (date = undefined) => {
   const maxMonthsGap = 7;
   const monthGap = getRandomInteger(-maxMonthsGap, maxMonthsGap);

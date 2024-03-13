@@ -4,7 +4,7 @@ import { getRandomValue } from '../utils/common';
 
 const generateComment = () => ({
   autor: getRandomValue(AUTORS),
-  comment: generateTextFromParagraph(PARAGRAPH),
+  text: generateTextFromParagraph(PARAGRAPH),
   date: generateDate(),
   emotion: getRandomValue(COMMENT_EMOTIONS),
 });

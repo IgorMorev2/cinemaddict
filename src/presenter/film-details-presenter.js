@@ -20,6 +20,34 @@ export default class FilmDetailsPresenter {
     this.#handlerEscKeyDown = handlerEscKeyDown;
   }
 
+  init = (film, comments) => {
+    this.#film = film;
+    this.#comments = comments;
+
+    const prevFilmDetailsComponent = this.#filmDetailsComponent;
+
+    this.#filmDetailsComponent = new FilmDetailsView(this.#film, this.#comments);
+
+    this.#filmDetailsComponent.setCloseBtnClickHandler(this.#handlerCloseBtnClick);
+
+    this.#filmDetailsComponent.setWatchlistBtnClickHandler(this.#handlerWatchlistBtnClick);
+    this.#filmDetailsComponent.setWatchedBtnClickHandler(this.#handlerWatchedBtnClick);
+    this.#filmDetailsComponent.setFavoriteBtnClickHandler(this.#handlerFavoriteBtnClick);
+
+    if (prevFilmDetailsComponent === null) {
+      render(this.#filmDetailsComponent, this.#filmDetailsContainer);
+    } else {
+      replace(this.#filmDetailsComponent, prevFilmDetailsComponent);
+    }
+
+    document.addEventListener('keydown', this.#handlerEscKeyDown);
+    document.body.classList.add('hide-overflow');
+  };
+
+  destroy = () => {
+    remove(this.#filmDetailsComponent);
+  };
+
   #handlerWatchlistBtnClick = () => {
     this.#changeData({
       ...this.#film,
@@ -48,33 +76,5 @@ export default class FilmDetailsPresenter {
         favorite: !this.#film.userDetails.favorite,
       }
     });
-  };
-
-  destroy = () => {
-    remove(this.#filmDetailsComponent);
-  };
-
-  init = (film, comments) => {
-    this.#film = film;
-    this.#comments = comments;
-
-    const prevFilmDetailsComponent = this.#filmDetailsComponent;
-
-    this.#filmDetailsComponent = new FilmDetailsView(this.#film, this.#comments);
-
-    this.#filmDetailsComponent.setCloseBtnClickHandler(this.#handlerCloseBtnClick);
-
-    this.#filmDetailsComponent.setWatchlistBtnClickHandler(this.#handlerWatchlistBtnClick);
-    this.#filmDetailsComponent.setWatchedBtnClickHandler(this.#handlerWatchedBtnClick);
-    this.#filmDetailsComponent.setFavoriteBtnClickHandler(this.#handlerFavoriteBtnClick);
-
-    if (prevFilmDetailsComponent === null) {
-      render(this.#filmDetailsComponent, this.#filmDetailsContainer);
-    } else {
-      replace(this.#filmDetailsComponent, prevFilmDetailsComponent);
-    }
-
-    document.addEventListener('keydown', this.#handlerEscKeyDown);
-    document.body.classList.add('hide-overflow');
   };
 }

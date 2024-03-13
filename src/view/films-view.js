@@ -1,9 +1,10 @@
 import AbstractView from '../framework/view/abstract-view';
 
+const createFilmsTemplate = () => '<section class="films"></section>';
+
 export default class FilmsView extends AbstractView {
-  #createFilmsTemplate = () => '<section class="films"></section>';
 
   get template() {
-    return this.#createFilmsTemplate();
+    return createFilmsTemplate();
   }
 }

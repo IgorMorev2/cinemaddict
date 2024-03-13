@@ -29,13 +29,12 @@ export const generateFilms = () => {
   return films.map((film, index) => {
     const hasComments = Boolean(getRandomInteger(0, 1));
 
-    const filmCommentCount = (hasComments)
-      ? getRandomInteger(1, MAX_COMMENTS_IN_FILM)
-      : 0;
+    const filmCommentCount = hasComments ? getRandomInteger(1, MAX_COMMENTS_IN_FILM) : 0;
 
     totalCommentsCount += filmCommentCount;
 
     const alreadyWatched = Boolean(getRandomInteger(0, 1));
+
     return {
       id: String(index + 1),
       comments: (hasComments) ? Array.from(
@@ -46,7 +45,7 @@ export const generateFilms = () => {
       userDetails: {
         watchList: Boolean(getRandomInteger(0, 1)),
         alreadyWatched,
-        watchindDate: alreadyWatched ? generateDate('2018-01-25'): null,
+        watchindDate: alreadyWatched ? generateDate('2018-01-25') : null,
         favorite: Boolean(getRandomInteger(0, 1)),
       },
     };

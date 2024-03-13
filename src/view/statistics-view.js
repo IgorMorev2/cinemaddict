@@ -1,9 +1,9 @@
 import AbstractView from '../framework/view/abstract-view';
 
+const createStatisticsTemplate = (allMoviesCount) => `<p>${allMoviesCount} movies inside</p>`;
+
 export default class StatisticsView extends AbstractView {
   #allMoviesCount = null;
-
-  #createStatisticsTemplate = (allMoviesCount) => `<p>${allMoviesCount} movies inside</p>`;
 
   constructor(allMoviesCount) {
     super();
@@ -11,6 +11,6 @@ export default class StatisticsView extends AbstractView {
   }
 
   get template() {
-    return this.#createStatisticsTemplate(this.#allMoviesCount);
+    return createStatisticsTemplate(this.#allMoviesCount);
   }
 }
