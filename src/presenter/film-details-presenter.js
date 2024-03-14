@@ -13,6 +13,12 @@ export default class FilmDetailsPresenter {
   #handlerCloseBtnClick = null;
   #handlerEscKeyDown = null;
 
+  #viewData = {
+    emotion: null,
+    comment: null,
+    scrollPosition: 0
+  };
+
   constructor(filmDetailsContainer, changeData, handlerCloseBtnClick, handlerEscKeyDown) {
     this.#filmDetailsContainer = filmDetailsContainer;
     this.#changeData = changeData;
@@ -26,7 +32,7 @@ export default class FilmDetailsPresenter {
 
     const prevFilmDetailsComponent = this.#filmDetailsComponent;
 
-    this.#filmDetailsComponent = new FilmDetailsView(this.#film, this.#comments);
+    this.#filmDetailsComponent = new FilmDetailsView(this.#film, this.#comments, this.#viewData, this.#updateViewData);
 
     this.#filmDetailsComponent.setCloseBtnClickHandler(this.#handlerCloseBtnClick);
 
@@ -46,6 +52,10 @@ export default class FilmDetailsPresenter {
 
   destroy = () => {
     remove(this.#filmDetailsComponent);
+  };
+
+  #updateViewData = (viewData) => {
+    this.#viewData = { ...viewData };
   };
 
   #handlerWatchlistBtnClick = () => {

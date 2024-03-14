@@ -1,6 +1,7 @@
-import { COMMENT_EMOTIONS, AUTORS, PARAGRAPH } from './fish-const';
+import { AUTORS, PARAGRAPH } from './fish-const';
 import { generateDate, generateTextFromParagraph } from '../utils/data';
 import { getRandomValue } from '../utils/common';
+import { COMMENT_EMOTIONS } from '../consts';
 
 const generateComment = () => ({
   autor: getRandomValue(AUTORS),

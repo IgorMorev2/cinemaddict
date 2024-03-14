@@ -1,5 +1,3 @@
-export const COMMENT_EMOTIONS = ['smile', 'sleeping', 'puke', 'angry'];
-
 export const FILMS = [
   'Made Of Each Other',
   'Popeye Meets Sindbad',

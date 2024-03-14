@@ -41,3 +41,5 @@ export const SORT_TYPES = {
   date: 'date',
   rating: 'rating',
 };
+
+export const COMMENT_EMOTIONS = ['smile', 'sleeping', 'puke', 'angry'];

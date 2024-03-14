@@ -93,6 +93,7 @@ export default class FilmsPresenter {
     if (evt.key === 'Escape') {
       this.#removeFilmDetailsComponent();
       document.removeEventListener('keydown', this.#handlerEscKeyDown);
+
     }
   };
 
